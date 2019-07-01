@@ -1,33 +1,22 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+
+// I removed the myStyle function and replaced it with a condition
+// changed the whole class to a function
 
 export class Item extends Component {
-
-    myStyle = () =>{
-        if(this.props.list.completed){
-           return {
-               textDecoration: 'line-through'
-         }
-        }else{
-            return {
-                textDecoration: 'none'
-        }
- }
-     }
-    render() {
-        return (
-            <div style={this.myStyle()}>
-                <p>
-                <input type="checkbox" onChange={this.props.markComplete.bind(this, 
-                 this.props.list.id)
-
-                }/>
-                {this.props.list.title}
-                </p>
-            </div>
-            
-            )
-        
-    }
+  render() {
+    return (
+      <div
+        style={{ textDecoration: this.props.list.completed && "line-through" }}
+      >
+        <input
+          type="checkbox"
+          onChange={this.props.markComplete.bind(this, this.props.list.id)}
+        />
+        {this.props.list.title}
+      </div>
+    );
+  }
 }
 
-export default Item
+export default Item;
