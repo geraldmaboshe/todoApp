@@ -1,5 +1,5 @@
 
-# TOdo App
+# Todo App
 
 This is a react app that displays todo items.
 It gets todo items from https://jsonplaceholder.typicode.com/todos and displays them using an array.
