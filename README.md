@@ -7,7 +7,7 @@
 - It is being hosted on https://todo-team.netlify.com. Make your contributions and send your pull requests with a netlify preview URL.
 
 ### How to run the app on your local machine
-- Make sure you have nodejs and npm installed on your machine
+- Make sure you have git, nodejs and npm installed on your machine
 - Clone the project to your prefered folder on your machine using the terminal
 - cd into the project folder
 - type 'npm install' to install the necessary packages
