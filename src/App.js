@@ -1,62 +1,46 @@
-import React, { Component } from 'react';
-import Todo from './components/Todo';
-import './App.css';
-import axios from 'axios';
-
+import React, { Component } from "react";
+import Todo from "./components/Todo";
+import "./App.css";
+import axios from "axios";
 
 class App extends Component {
   state = {
-    main: [
-      // {
-      //   id: 1,
-      //   title: "going to Bongohive",
-      //   completed: true,
-      //   items: [
-      //     {
-      //       id: 2,
-      //       title: "doing the hackathon",
-      //       completed: false,
-      //     }
-      //   ]
+    main: []
+  };
+  // this can still be improved
+  // the difference between the earlier method is that this doesnt directly access this.state
+  // it changes the state it is getting, find a way of making this
+  // figure out a way of making this more cleaner 😉
+  markComplete = (e, id) => {
+    this.setState(state => ({
+      main: state.main.map(list => {
+        if (list.id === id) {
+          list.completed = !list.completed;
+        }
+        return list;
+      })
+    }));
+  };
 
-
-      // },
-      // {
-      //   id: 1,
-      //   title: "going home",
-      //   completed: false,
-      //   items: [
-      //     {
-      //       id: 2,
-      //       title: "cooking",
-      //       completed: true
-      //     }
-      //   ]
-
-
-      // }
-    ]
-  }
-  markComplete = (id) =>{
-    this.setState({main: this.state.main.map(list =>{
-      if(list.id === id){
-        list.completed = !list.completed
-      }return list;
-    })});
-    
-  }
- 
-
-  componentDidMount(){
-      axios.get('https://jsonplaceholder.typicode.com/todos').
-      then(res=>this.setState({main: res.data}))
+  componentDidMount() {
+    // There is a lot improvement that you should here as well
+    //  make sure you catch errors that might happen
+    // an example is a network error, try and turn off internet and see what happens
+    axios
+      .get("https://jsonplaceholder.typicode.com/todos")
+      .then(res => this.setState({ main: res.data }));
   }
 
-
+  // leverage conditional rendering more
+  //  example is a loading message added that will display when the todos haven't loaded yet
   render() {
     return (
-      <div className="App" >
-        <Todo value={this.state.main} markComplete={this.markComplete}/>
+      <div className="App">
+        {this.state.main.length ? (
+          <Todo value={this.state.main} markComplete={this.markComplete} />
+        ) : (
+          <h4>Loading ...</h4>
+        )}
       </div>
     );
   }
